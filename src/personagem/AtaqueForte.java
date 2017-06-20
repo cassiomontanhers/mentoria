@@ -9,4 +9,13 @@ public class AtaqueForte implements Ataque{
 		return Math.multiplyExact(personagem.getTamanho().getValor(), NumerosMagicos.DOIS.getValor());
 	}
 
+	@Override
+	public Integer atacarComArma(Personagem personagem) {
+		if(personagem.getArma() != null){
+			return this.atacar(personagem) + personagem.getArma().getDano();			
+		}
+		System.out.println("O " + personagem.getNome() + " não possui arma, ele ira atacar desarmado.");
+		return this.atacar(personagem);
+	}
+
 }
