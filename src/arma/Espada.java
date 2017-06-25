@@ -1,10 +1,21 @@
 package arma;
 
-public class Espada extends Arma{
+public class Espada implements Arma{
+	
+	private String nome = "Espada";
+	private int ataque = 10;
 	
 	public Espada(){
-		nome = "Espada";
-		dano = 10;
+	}
+
+	@Override
+	public int PoderDeAtaque() {
+		return this.ataque;
+	}
+
+	@Override
+	public String Descricao() {
+		return this.nome;
 	}
 
 }

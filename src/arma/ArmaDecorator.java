@@ -1,20 +1,39 @@
 package arma;
 
-public abstract class ArmaDecorator extends Arma{
-	
+public class ArmaDecorator implements Arma{
+
 	Arma arma;
-
-	public ArmaDecorator(Arma armaDecorator) {
-		arma = armaDecorator;
-	}
-
+	private String nome;
+	private int ataque;
 	
-	public String getNome() {
-		return arma.getNome() + nome;
+	public ArmaDecorator(Arma arma){
+		this.arma = arma;
 	}
 
-	public int getDano() {
-		return arma.getDano() + dano;
+	@Override
+	public int PoderDeAtaque() {
+		return this.arma.PoderDeAtaque() + this.ataque;
+	}
+
+	@Override
+	public String Descricao() {
+		return this.arma.Descricao() + this.nome;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public int getAtaque() {
+		return ataque;
+	}
+
+	public void setAtaque(int ataque) {
+		this.ataque = ataque;
 	}
 	
 }

@@ -1,37 +1,35 @@
 package personagem;
 
 import arma.Arma;
-import util.ForcaAtaque;
+import util.Defesa;
 import util.Tamanho;
+import util.TipoPersonagem;
 
 public class Personagem {
 	
 	private Tamanho tamanho;
 	private Ataque ataque;
-	private String nome;
+	private TipoPersonagem tipoPersonagem;
 	private Arma arma;
+	private Defesa defesa;
 
-	public Personagem(Tamanho tamanho, ForcaAtaque ataque, String nome){
+	public Personagem(Tamanho tamanho, Ataque ataque, Defesa defesa, TipoPersonagem tipoPersonagem){
 		this.tamanho = tamanho;
-		this.nome = nome;
-		switch (ataque) {
-		case FORTE:
-			this.ataque = new AtaqueForte();
-			break;
-		case FRACO:
-			this.ataque = new AtaqueFraco();
-			break;
-		default:
-			break;
-		}
+		this.setTipoPersonagem(tipoPersonagem);
+		this.ataque = ataque;
+		this.setDefesa(defesa);
 	}
 
 	public void Atacar(){
-		System.out.println("Ataque do " + this.nome + " " + this.ataque.atacar(this));
+		System.out.println("Ataque do " + this.getTipoPersonagem() + " " + this.ataque.atacar(this));
 	}
 	
 	public void AtacarComArma(){
-		System.out.println("Ataque do " + this.nome + " usando um(a) " + this.arma.getNome() + " : " + this.ataque.atacarComArma(this));
+		System.out.println("Ataque do " + this.getTipoPersonagem() + " usando um(a) " + this.arma.Descricao() + " : " + this.ataque.atacarComArma(this));
+	}
+	
+	public int getPoderDeAtaque(){
+		return this.ataque.atacarComArma(this);
 	}
 
 	public Tamanho getTamanho() {
@@ -44,11 +42,11 @@ public class Personagem {
 	
 
 	public String getNome() {
-		return nome;
+		return getTipoPersonagem().getValor();
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNome(TipoPersonagem tipoPersonagem) {
+		this.setTipoPersonagem(tipoPersonagem);
 	}
 
 	public Arma getArma() {
@@ -57,6 +55,33 @@ public class Personagem {
 
 	public void setArma(Arma arma) {
 		this.arma = arma;
+	}
+	
+	public void info(){
+		System.out.println("-- INFO PERSONAGEM --");
+		System.out.println("Nome : " + getTipoPersonagem().getValor());
+		System.out.println("Tamanho : " + tamanho);
+		System.out.print("Ataque : ");
+		AtacarComArma();
+		System.out.println("Arma : " + arma.Descricao());
+		System.out.println("Defesa : " +  getDefesa().name());
+		
+	}
+
+	public Defesa getDefesa() {
+		return defesa;
+	}
+
+	public void setDefesa(Defesa defesa) {
+		this.defesa = defesa;
+	}
+
+	public TipoPersonagem getTipoPersonagem() {
+		return tipoPersonagem;
+	}
+
+	public void setTipoPersonagem(TipoPersonagem tipoPersonagem) {
+		this.tipoPersonagem = tipoPersonagem;
 	}
 
 }

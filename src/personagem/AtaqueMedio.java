@@ -2,13 +2,13 @@ package personagem;
 
 import util.NumerosMagicos;
 
-public class AtaqueFraco implements Ataque{
+public class AtaqueMedio implements Ataque{
 
 	@Override
 	public Integer atacar(Personagem personagem) {
-		return Math.multiplyExact(personagem.getTamanho().getValor(), NumerosMagicos.UM.getValor());
+		return Math.multiplyExact(personagem.getTamanho().getValor(), NumerosMagicos.DOIS.getValor());
 	}
-	
+
 	@Override
 	public Integer atacarComArma(Personagem personagem) {
 		if(personagem.getArma() != null){
@@ -17,5 +17,5 @@ public class AtaqueFraco implements Ataque{
 		System.out.println("O " + personagem.getNome() + " não possui arma, ele ira atacar desarmado.");
 		return this.atacar(personagem);
 	}
-	
+
 }

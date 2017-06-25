@@ -1,16 +1,9 @@
 package arma;
 
-public abstract class Arma {
-
-	String nome;
-	int dano;
+public interface Arma {
 	
-	public int getDano() {
-		return dano;
-	}
+	public int PoderDeAtaque();
 	
-	public String getNome() {
-		return nome;
-	}
-	
+	public String Descricao();
+		
 }
