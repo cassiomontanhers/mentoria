@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import personagem.Personagem;
-import util.TipoPersonagem;
 
 public class Exercito {
 
