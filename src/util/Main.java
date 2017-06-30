@@ -1,25 +1,30 @@
 package util;
 
-import Controller.ExercitoController;
 import Exercito.Exercito;
 import factory.BarbaroFactory;
 import factory.BritanicosFactory;
+import factory.ExercitoFactory;
 import factory.FrancesesFactory;
 
 public class Main {
 
 	public static void main(String[] args) {
 
-		ExercitoController exercitoController = new ExercitoController();
+		ExercitoFactory exercitoFactory = new ExercitoFactory();
 
-		Exercito exercitoBarbaro = exercitoController.montarExercito(new BarbaroFactory());
-		Exercito exercitoBritanico = exercitoController.montarExercito(new BritanicosFactory());
-		Exercito exercitoFrances = exercitoController.montarExercito(new FrancesesFactory());
-		
+		Exercito exercitoBarbaro = exercitoFactory.montarExercito(new BarbaroFactory());
+		Exercito exercitoBritanico = exercitoFactory.montarExercito(new BritanicosFactory());
+		Exercito exercitoFrances = exercitoFactory.montarExercito(new FrancesesFactory());
+
 		exercitoBarbaro.info();
+		exercitoBarbaro.showArmasExercito();
+
 		exercitoBritanico.info();
+		exercitoBritanico.showArmasExercito();
+
 		exercitoFrances.info();
-		
+		exercitoFrances.showArmasExercito();
+
 	}
 
 }

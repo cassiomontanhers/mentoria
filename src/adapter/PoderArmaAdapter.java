@@ -1,16 +1,17 @@
 package adapter;
 
 import arma.Arma;
+import arma.ArmaVisitor;
 import poder.Poder;
 
 public class PoderArmaAdapter extends Poder implements Arma{
-	
+
 	private Poder poder;
-	
+
 	public PoderArmaAdapter(Poder poder){
 		this.poder = poder;
 	}
-	
+
 	@Override
 	public int PoderDeAtaque() {
 		return poder.getPoderDeMagia();
@@ -19,6 +20,11 @@ public class PoderArmaAdapter extends Poder implements Arma{
 	@Override
 	public String Descricao() {
 		return poder.getDescricao();
+	}
+
+	@Override
+	public String visit(ArmaVisitor visitor) {
+		return visitor.accept(this);
 	}
 
 }

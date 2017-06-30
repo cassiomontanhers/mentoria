@@ -8,4 +8,9 @@ public class Reforcado extends ReforcoArma{
 		this.setNome(" Reforçado");
 	}
 
+	@Override
+	public String visit(ArmaVisitor visitor) {
+		return visitor.accept(this) + " -> "+this.arma.visit(visitor);
+	}
+
 }

@@ -4,7 +4,7 @@ public class ArmaBase implements Arma{
 
 	private String nome;
 	private int ataque;
-	
+
 	@Override
 	public int PoderDeAtaque() {
 		return this.getAtaque();
@@ -29,6 +29,11 @@ public class ArmaBase implements Arma{
 
 	public void setAtaque(int ataque) {
 		this.ataque = ataque;
+	}
+
+	@Override
+	public String visit(ArmaVisitor visitor) {
+		return visitor.accept(this);
 	}
 
 }

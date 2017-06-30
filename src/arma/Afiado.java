@@ -8,4 +8,9 @@ public class Afiado extends ReforcoArma{
 		this.setAtaque(7);
 	}
 
+	@Override
+	public String visit(ArmaVisitor visitor) {
+		return visitor.accept(this) + " -> "+this.arma.visit(visitor);
+	}
+
 }
