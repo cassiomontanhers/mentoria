@@ -4,7 +4,7 @@ import arma.Arma;
 import arma.ArmaVisitor;
 import poder.Poder;
 
-public class PoderArmaAdapter extends Poder implements Arma{
+public class PoderArmaAdapter implements Arma{
 
 	private Poder poder;
 
