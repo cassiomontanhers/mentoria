@@ -1,6 +1,6 @@
 package arma;
 
-public class Reforcado extends ArmaDecorator{
+public class Reforcado extends ReforcoArma{
 
 	public Reforcado(Arma arma) {
 		super(arma);

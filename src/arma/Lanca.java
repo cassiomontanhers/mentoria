@@ -1,21 +1,21 @@
 package arma;
 
-public class Lanca implements Arma {
+public class Lanca extends ArmaBase {
 
-	private String nome = "Lança";
-	private int ataque = 15;
 	
 	public Lanca(){
+		setNome("Lança");
+		setAtaque(15);
 	}
 
 	@Override
 	public int PoderDeAtaque() {
-		return this.ataque;
+		return this.getAtaque();
 	}
 
 	@Override
 	public String Descricao() {
-		return this.nome;
+		return this.getNome();
 	}
 
 

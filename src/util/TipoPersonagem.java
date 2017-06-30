@@ -4,7 +4,8 @@ public enum TipoPersonagem {
 
 	GUERREIRO("Guerreiro"),
 	ARQUEIRO("Arqueiro"),
-	LANCEIRO("Lanceiro");
+	LANCEIRO("Lanceiro"),
+	HEROI("Heroi");
 	
 	private String tipo;
 	

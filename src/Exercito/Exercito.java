@@ -7,7 +7,7 @@ import personagem.Personagem;
 
 public class Exercito {
 
-	private List<Personagem> exercito = new ArrayList<>();
+	private List<Personagem> personagensList = new ArrayList<>();
 	private String nomeExercito;
 	
 	public Exercito(String nome){
@@ -16,7 +16,7 @@ public class Exercito {
 	
 	public void addPersonagemNoExercito(Personagem personagem){
 		
-		exercito.add(personagem);
+		getPersonagens().add(personagem);
 		
 	}
 	
@@ -29,8 +29,9 @@ public class Exercito {
 		int quantidadeArqueiros = 0;
 		int quantidadeGuerreiro = 0;
 		int quantidadeLanceiros = 0;
+		int quantidadeHeroi = 0;
 		
-		for (Personagem personagem : exercito) {
+		for (Personagem personagem : getPersonagens()) {
 			
 			forcaAtaqueDoExercito += personagem.getPoderDeAtaque();
 			defesaDoExercito += personagem.getDefesa().getValor();
@@ -46,6 +47,9 @@ public class Exercito {
 			case LANCEIRO:
 				quantidadeLanceiros++;
 				break;
+			case HEROI:
+				quantidadeHeroi++;
+				break;
 			default:
 				break;
 			}
@@ -57,9 +61,18 @@ public class Exercito {
 		System.out.println("    Guerreiros : "+	quantidadeGuerreiro);
 		System.out.println("    Arqueiros : "+	quantidadeArqueiros);
 		System.out.println("    Lanceiros : "+	quantidadeLanceiros);
+		System.out.println("    HEROI : "+	quantidadeHeroi);
 		System.out.println("Força do exercito : " + forcaAtaqueDoExercito);
 		System.out.println("Defesa do exercito : "+ defesaDoExercito);
 		
+	}
+
+	public List<Personagem> getPersonagens() {
+		return personagensList;
+	}
+
+	public void setPersonagens(List<Personagem> personagens) {
+		this.personagensList = personagens;
 	}
 	
 }

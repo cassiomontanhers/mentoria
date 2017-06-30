@@ -17,6 +17,10 @@ public class ExercitoController {
 		gerarArqueiros(exercito, fabrica);
 		gerarLanceiros(exercito, fabrica);
 		
+		if(exercito.getPersonagens().size() < 15){
+			exercito.addPersonagemNoExercito(fabrica.criarHeroi());
+		}
+		
 		return exercito;
 	}
 

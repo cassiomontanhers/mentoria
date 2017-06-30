@@ -1,10 +1,12 @@
 package factory;
 
-import personagem.Personagem;
+import personagem.HumanoComum;
+import personagem.HumanoHeroi;
 
 public interface PersonagemFactory {
-	Personagem criarGuerreiro();
-	Personagem criarArqueiro();
-	Personagem criarLanceiro();
+	HumanoComum criarGuerreiro();
+	HumanoComum criarArqueiro();
+	HumanoComum criarLanceiro();
+	HumanoHeroi criarHeroi();
 	String getNomeFactory();
 }

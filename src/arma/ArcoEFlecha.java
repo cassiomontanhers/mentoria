@@ -1,18 +1,20 @@
 package arma;
 
-public class ArcoEFlecha implements Arma{
+public class ArcoEFlecha extends ArmaBase{
 
-	private String nome = "Arco e Flecha";
-	private int ataque = 25;
+	public ArcoEFlecha(){
+		setNome("Arco e Flecha");
+		setAtaque(25);
+	}
 	
 	@Override
 	public int PoderDeAtaque() {
-		return ataque;
+		return getAtaque();
 	}
 
 	@Override
 	public String Descricao() {
-		return nome;
+		return getNome();
 	}
 	
 }

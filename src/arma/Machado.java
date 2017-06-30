@@ -1,18 +1,21 @@
 package arma;
 
-public class Machado implements Arma{
+public class Machado extends ArmaBase{
 
-	private String nome = "Machado";
-	private int ataque = 20;
+	
+	public Machado(){
+		setNome("Machado");
+		setAtaque(20);
+	}
 	
 	@Override
 	public int PoderDeAtaque() {
-		return ataque;
+		return getAtaque();
 	}
 
 	@Override
 	public String Descricao() {
-		return nome;
+		return getNome();
 	}
 
 }
