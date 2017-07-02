@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import Exercito.Exercito;
+import personagem.HumanoHeroi;
 import personagem.Personagem;
 
 public class ExercitoFactory {
@@ -13,17 +14,35 @@ public class ExercitoFactory {
 
 	public Exercito montarExercito(PersonagemFactory fabrica) {
 
+		Exercito exercito = gerarPersonagens(fabrica);
+		setarHeroi(fabrica, exercito);
+		setarMoral(exercito);
+		return exercito;
+	}
+
+	private Exercito gerarPersonagens(PersonagemFactory fabrica) {
 		Exercito exercito = new Exercito(fabrica.getNomeFactory());
 
 		exercito.addPersonagemNoExercito(cria(fabrica::criarGuerreiro));
 		exercito.addPersonagemNoExercito(cria(fabrica::criarArqueiro));
 		exercito.addPersonagemNoExercito(cria(fabrica::criarLanceiro));
+		return exercito;
+	}
 
+	private void setarHeroi(PersonagemFactory fabrica, Exercito exercito) {
 		if(exercito.getPersonagens().size() < 15){
 			exercito.addPersonagemNoExercito(fabrica.criarHeroi());
 		}
+	}
 
-		return exercito;
+	private void setarMoral(Exercito exercito) {
+		
+		for(Personagem personagem : exercito.getPersonagens()){
+			if (personagem instanceof HumanoHeroi){
+				exercito.ganharMoral();
+			}
+		}
+		
 	}
 
 	private List<Personagem> cria(java.util.function.Supplier<Personagem> supplier) {

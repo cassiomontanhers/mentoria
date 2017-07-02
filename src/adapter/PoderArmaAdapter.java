@@ -24,7 +24,7 @@ public class PoderArmaAdapter implements Arma{
 
 	@Override
 	public String visit(ArmaVisitor visitor) {
-		return visitor.accept(this);
+		return visitor.accept(this.poder);
 	}
 
 }

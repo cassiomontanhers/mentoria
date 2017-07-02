@@ -1,19 +1,17 @@
 package util;
 
-public enum NumerosMagicos {
-
-	ZERO(0),
-	UM(1),
-	DOIS(2),
-	TRES(3),
-	DEZ(10);
+public enum Dificuldade {
+	
+	FACIL(1),
+	MEDIA(2),
+	DIFICIL(3);
 	
 	private int valor;
 	
-	NumerosMagicos(int valor){
+	Dificuldade(int valor){
 		this.valor = valor;
 	}
-
+	
 	public int getValor(){
 		return this.valor;
 	}

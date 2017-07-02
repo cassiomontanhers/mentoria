@@ -8,14 +8,19 @@ import arma.Arma;
 import arma.ArmaVisitor;
 import arma.Reforcado;
 import personagem.Personagem;
+import poder.Poder;
+import state.MoralNormal;
+import state.MoralState;
 
 public class Exercito {
 
 	private List<Personagem> personagensList = new ArrayList<>();
 	private String nomeExercito;
+	private MoralState state;
 
 	public Exercito(String nome){
 		this.nomeExercito = nome;
+		this.state = new MoralNormal();
 	}
 
 	public void addPersonagemNoExercito(Personagem personagem){
@@ -28,9 +33,9 @@ public class Exercito {
 
 	public void info(){
 
+		int forcaAtaqueDoExercitoMoral = 0;
 		int forcaAtaqueDoExercito = 0;
 		int defesaDoExercito = 0;
-		int tamanhoDoExercito = 0;
 
 		int quantidadeArqueiros = 0;
 		int quantidadeGuerreiro = 0;
@@ -40,8 +45,9 @@ public class Exercito {
 		for (Personagem personagem : getPersonagens()) {
 
 			forcaAtaqueDoExercito += personagem.getPoderDeAtaque();
+			forcaAtaqueDoExercitoMoral += personagem.getPoderDeAtaque()+state.getForcaMoral();
+
 			defesaDoExercito += personagem.getDefesa().getValor();
-			tamanhoDoExercito++;
 
 			switch (personagem.getTipoPersonagem()) {
 			case ARQUEIRO:
@@ -63,14 +69,17 @@ public class Exercito {
 		}
 
 		System.out.println(" -- INFO EXERCITO "+nomeExercito+" -- ");
-		System.out.println("Tamanho do exercito : " + tamanhoDoExercito);
+		System.out.println("Moral Exercito : " + state.getDescricaoMoral());
+		System.out.println("Tamanho do exercito : " + this.getPersonagens().size());
 		System.out.println("    Guerreiros : "+	quantidadeGuerreiro);
 		System.out.println("    Arqueiros : "+	quantidadeArqueiros);
 		System.out.println("    Lanceiros : "+	quantidadeLanceiros);
 		System.out.println("    HEROI : "+	quantidadeHeroi);
 		System.out.println("Força do exercito : " + forcaAtaqueDoExercito);
+		System.out.println("Força do exercito + Moral : " + forcaAtaqueDoExercitoMoral);
 		System.out.println("Defesa do exercito : "+ defesaDoExercito);
 
+//		showArmasExercito();
 	}
 
 	public void showArmasExercito(){
@@ -93,6 +102,11 @@ public class Exercito {
 					return reforcado.getClass().getSimpleName();
 				}
 
+				@Override
+				public String accept(Poder poder) {
+					return poder.getClass().getSimpleName();
+				}
+
 			});
 
 		}).forEach(System.out::println);
@@ -104,6 +118,14 @@ public class Exercito {
 
 	public void setPersonagens(List<Personagem> personagens) {
 		this.personagensList = personagens;
+	}
+	
+	public void ganharMoral(){
+		this.state = this.state.getProximoEstado();
+	}
+	
+	public void perderMoral(){
+		this.state = this.state.getEstadoAnterior();
 	}
 
 }
