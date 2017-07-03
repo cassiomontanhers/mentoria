@@ -4,11 +4,11 @@ import util.NumerosMagicos;
 
 public class MoralBaixa implements MoralState{
 
-	private String descricaoMoral = "Moral Baixa"; 
-	
+	private String descricaoMoral = "Moral Baixa";
+
 	@Override
 	public int getForcaMoral() {
-		return -NumerosMagicos.DEZ.getValor();
+		return -NumerosMagicos.CINCO.getValor();
 	}
 
 	@Override

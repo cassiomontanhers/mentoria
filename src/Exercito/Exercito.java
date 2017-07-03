@@ -19,7 +19,7 @@ public class Exercito {
 	private MoralState state;
 
 	public Exercito(String nome){
-		this.nomeExercito = nome;
+		this.setNomeExercito(nome);
 		this.state = new MoralNormal();
 	}
 
@@ -68,7 +68,7 @@ public class Exercito {
 
 		}
 
-		System.out.println(" -- INFO EXERCITO "+nomeExercito+" -- ");
+		System.out.println(" -- INFO EXERCITO "+getNomeExercito()+" -- ");
 		System.out.println("Moral Exercito : " + state.getDescricaoMoral());
 		System.out.println("Tamanho do exercito : " + this.getPersonagens().size());
 		System.out.println("    Guerreiros : "+	quantidadeGuerreiro);
@@ -79,7 +79,6 @@ public class Exercito {
 		System.out.println("Força do exercito + Moral : " + forcaAtaqueDoExercitoMoral);
 		System.out.println("Defesa do exercito : "+ defesaDoExercito);
 
-//		showArmasExercito();
 	}
 
 	public void showArmasExercito(){
@@ -119,13 +118,29 @@ public class Exercito {
 	public void setPersonagens(List<Personagem> personagens) {
 		this.personagensList = personagens;
 	}
-	
+
 	public void ganharMoral(){
 		this.state = this.state.getProximoEstado();
+		updateMoralPersonagens();
 	}
-	
+
 	public void perderMoral(){
 		this.state = this.state.getEstadoAnterior();
+		updateMoralPersonagens();
+	}
+
+	private void updateMoralPersonagens() {
+		for (Personagem personagem : personagensList) {
+			personagem.setMoral(this.state);
+		}
+	}
+
+	public String getNomeExercito() {
+		return nomeExercito;
+	}
+
+	public void setNomeExercito(String nomeExercito) {
+		this.nomeExercito = nomeExercito;
 	}
 
 }
