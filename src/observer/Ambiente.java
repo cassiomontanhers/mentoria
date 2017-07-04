@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ambiente {
-	
-	private List<Observer> observers = new ArrayList<>();
+
+	private List<AmbienteObserver> observers = new ArrayList<>();
 	private Clima clima;
 
-	public void attach(Observer observer) {
+	public void attach(AmbienteObserver observer) {
 		observers.add(observer);
 	}
 
@@ -17,8 +17,8 @@ public class Ambiente {
 	}
 
 	private void notifyObservers() {
-		for (Observer observer : observers) {
-			observer.update();
+		for (AmbienteObserver observer : observers) {
+			observer.update(this);
 		}
 	}
 
@@ -30,5 +30,5 @@ public class Ambiente {
 		this.clima = clima;
 		notifyObservers();
 	}
-	
+
 }

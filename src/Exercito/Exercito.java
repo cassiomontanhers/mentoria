@@ -7,12 +7,14 @@ import arma.Afiado;
 import arma.Arma;
 import arma.ArmaVisitor;
 import arma.Reforcado;
+import observer.Ambiente;
+import observer.AmbienteObserver;
 import personagem.Personagem;
 import poder.Poder;
 import state.MoralNormal;
 import state.MoralState;
 
-public class Exercito {
+public class Exercito implements AmbienteObserver {
 
 	private List<Personagem> personagensList = new ArrayList<>();
 	private String nomeExercito;
@@ -141,6 +143,23 @@ public class Exercito {
 
 	public void setNomeExercito(String nomeExercito) {
 		this.nomeExercito = nomeExercito;
+	}
+
+	@Override
+	public void update(Ambiente ambiente) {
+		switch (ambiente.getClima().getDificuldade()) {
+		case DIFICIL:
+			this.perderMoral();
+			break;
+		case MEDIA:
+			break;
+		case FACIL:
+			this.ganharMoral();
+			break;
+		default:
+			break;
+		}
+
 	}
 
 }

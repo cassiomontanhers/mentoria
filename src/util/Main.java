@@ -21,17 +21,17 @@ public class Main {
 		Exercito exercitoBritanico = exercitoFactory.montarExercito(new BritanicosFactory());
 		Exercito exercitoFrances = exercitoFactory.montarExercito(new FrancesesFactory());
 
-//		exercitoBarbaro.info();
-//		exercitoBritanico.info();
-//		exercitoFrances.info();
+		exercitoBarbaro.info();
+		exercitoBritanico.info();
+		exercitoFrances.info();
 
 		System.out.println("////////////////////////////////////////////////////////////////////////////////////////////////////////////");
 
 		//AMBIENTE
 		Ambiente ambiente = new Ambiente();
-		ambiente.attach(new ExercitoObserver(ambiente,exercitoBarbaro));
-		ambiente.attach(new ExercitoObserver(ambiente,exercitoBritanico));
-		ambiente.attach(new ExercitoObserver(ambiente,exercitoFrances));
+		ambiente.attach(new ExercitoObserver(exercitoBarbaro));
+		ambiente.attach(new ExercitoObserver(exercitoBritanico));
+		ambiente.attach(new ExercitoObserver(exercitoFrances));
 
 		ambiente.setClima(new Chuva());
 

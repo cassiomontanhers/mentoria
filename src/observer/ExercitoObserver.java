@@ -2,21 +2,17 @@ package observer;
 
 import Exercito.Exercito;
 
-public class ExercitoObserver extends Observer {
+public class ExercitoObserver implements AmbienteObserver {
 
 	private Exercito exercito;
 
-	public ExercitoObserver(Ambiente ambiente, Exercito exercito) {
-		super(ambiente);
+	public ExercitoObserver(Exercito exercito) {
+		super();
 		this.exercito = exercito;
 	}
 
 	@Override
-	public void update() {
-		updateMoral();
-	}
-
-	private void updateMoral() {
+	public void update(Ambiente ambiente) {
 		switch (ambiente.getClima().getDificuldade()) {
 		case DIFICIL:
 			exercito.perderMoral();
