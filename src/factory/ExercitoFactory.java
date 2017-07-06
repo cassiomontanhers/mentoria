@@ -15,8 +15,8 @@ public class ExercitoFactory {
 	public Exercito montarExercito(PersonagemFactory fabrica) {
 
 		Exercito exercito = gerarPersonagens(fabrica);
-		setarHeroi(fabrica, exercito);
-		setarMoral(exercito);
+		inserirHeroi(fabrica, exercito);
+		inserirMoral(exercito);
 		return exercito;
 	}
 
@@ -29,13 +29,13 @@ public class ExercitoFactory {
 		return exercito;
 	}
 
-	private void setarHeroi(PersonagemFactory fabrica, Exercito exercito) {
+	private void inserirHeroi(PersonagemFactory fabrica, Exercito exercito) {
 		if(exercito.getPersonagens().size() < 15){
 			exercito.addPersonagemNoExercito(fabrica.criarHeroi());
 		}
 	}
 
-	private void setarMoral(Exercito exercito) {
+	private void inserirMoral(Exercito exercito) {
 		
 		for(Personagem personagem : exercito.getPersonagens()){
 			if (personagem instanceof HumanoHeroi){

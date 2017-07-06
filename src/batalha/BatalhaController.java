@@ -17,32 +17,29 @@ public class BatalhaController {
 		this.exercitoUm = exercitoUm;
 		this.exercitoDois = exercitoDois;
 
-		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++INICIO DA BATALHA++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-
+		System.out.println("+++++++++++++++++++++++++++++++++INICIO DA BATALHA+++++++++++++++++++++++++++++++++");
 		combateBatalhao(TipoPersonagem.GUERREIRO);
 		combateBatalhao(TipoPersonagem.ARQUEIRO);
 		combateBatalhao(TipoPersonagem.LANCEIRO);
+		avaliarMoral();
+
+		System.out.println("++++++++++++++++++++++++++++++++RESULTADO DA BATALHA+++++++++++++++++++++++++++++++");
 
 	}
 
-	private void combateBatalhao(TipoPersonagem tipoPersonagem) {
+	private void avaliarMoral() {
+		if(exercitoUm.getPersonagens().size() != exercitoDois.getPersonagens().size()){
+			if(exercitoUm.getPersonagens().size() > exercitoDois.getPersonagens().size()){
+				exercitoUm.ganharMoral();
+				exercitoDois.perderMoral();
+			}else{
+				exercitoDois.ganharMoral();
+				exercitoUm.perderMoral();
+			}
+		}
+	}
 
-//		exercitoUm.getPersonagens().stream()
-//				.filter(p -> p.getTipoPersonagem().equals(TipoPersonagem.GUERREIRO))
-//				.map(p->{
-//
-//
-//					exercitoDois.getPersonagens().stream()
-//					.filter(p2 -> p2.getTipoPersonagem().equals(TipoPersonagem.GUERREIRO))
-//					.map(p2->{
-//						p2.info();
-//			            return p2;
-//			        }).forEach(System.out::println);
-//
-//
-//					p.info();
-//		            return p;
-//		        }).forEach(System.out::println);
+	private void combateBatalhao(TipoPersonagem tipoPersonagem) {
 
 		List<Personagem> personagensUm = (List<Personagem>) exercitoUm.getPersonagens().stream()
 		.filter(p -> p.getTipoPersonagem().equals(tipoPersonagem))
@@ -56,14 +53,10 @@ public class BatalhaController {
 
 
 		if(personagensUm.size() >= personagensDois.size()){
-			exercitoUm.ganharMoral();
-			exercitoDois.perderMoral();
 			for (int i = 0; i < personagensDois.size(); i++) {
 				batalharPersonagem(personagensUm.get(i), personagensDois.get(i));
 			}
 		}else{
-			exercitoUm.perderMoral();
-			exercitoDois.ganharMoral();
 			for (int i = 0; i < personagensUm.size(); i++) {
 				batalharPersonagem(personagensUm.get(i), personagensDois.get(i));
 			}
@@ -97,8 +90,8 @@ public class BatalhaController {
 	private void aplicarDanoNoPersonagem(Personagem personagem, int valorDanoAtaque) {
 		int qntDeEstadosConstituicaoParaReduzir = Math.abs(valorDanoAtaque/5);
 		for (int i = 0; i < qntDeEstadosConstituicaoParaReduzir; i++) {
-			System.out.println("Personagem "+personagem.getNome() +" teve sua consituicao reduzida a "+personagem.getConstituicao().getDescricaoConstituicao());
 			personagem.setConstituicao(personagem.getConstituicao().getEstadoAnterior());
+			System.out.println("Personagem "+personagem.getNome() +" teve sua consituicao reduzida a "+personagem.getConstituicao().getDescricaoConstituicao());
 		}
 	}
 }

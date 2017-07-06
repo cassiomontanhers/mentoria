@@ -2,14 +2,14 @@ package observer;
 
 import util.Dificuldade;
 
-public class Chuva implements Clima{
+public class Tempestade implements Clima {
 
 	private String nome;
 	private Dificuldade dificuldade;
 
-	public Chuva() {
-		this.dificuldade = Dificuldade.MEDIA;
-		this.nome = "Chuva";
+	public Tempestade() {
+		this.dificuldade = Dificuldade.DIFICIL;
+		this.nome = "Tempestade";
 	}
 
 	@Override

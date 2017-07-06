@@ -28,6 +28,7 @@ public class Ambiente {
 
 	public void setClima(Clima clima) {
 		this.clima = clima;
+		System.out.println("---------------------------------------CLIMA "+clima.getClass().getSimpleName()+"---------------------------------------");
 		notifyObservers();
 	}
 

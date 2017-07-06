@@ -18,11 +18,11 @@ public class Exercito implements AmbienteObserver {
 
 	private List<Personagem> personagensList = new ArrayList<>();
 	private String nomeExercito;
-	private MoralState state;
+	private MoralState moralState;
 
 	public Exercito(String nome){
 		this.setNomeExercito(nome);
-		this.state = new MoralNormal();
+		this.moralState = new MoralNormal();
 	}
 
 	public void addPersonagemNoExercito(Personagem personagem){
@@ -47,7 +47,7 @@ public class Exercito implements AmbienteObserver {
 		for (Personagem personagem : getPersonagens()) {
 
 			forcaAtaqueDoExercito += personagem.getPoderDeAtaque();
-			forcaAtaqueDoExercitoMoral += personagem.getPoderDeAtaque()+state.getForcaMoral();
+			forcaAtaqueDoExercitoMoral += personagem.getPoderDeAtaque()+moralState.getForcaMoral();
 
 			defesaDoExercito += personagem.getDefesa().getValor();
 
@@ -71,7 +71,7 @@ public class Exercito implements AmbienteObserver {
 		}
 
 		System.out.println(" -- INFO EXERCITO "+getNomeExercito()+" -- ");
-		System.out.println("Moral Exercito : " + state.getDescricaoMoral());
+		System.out.println("Moral Exercito : " + moralState.getDescricaoMoral());
 		System.out.println("Tamanho do exercito : " + this.getPersonagens().size());
 		System.out.println("    Guerreiros : "+	quantidadeGuerreiro);
 		System.out.println("    Arqueiros : "+	quantidadeArqueiros);
@@ -84,6 +84,9 @@ public class Exercito implements AmbienteObserver {
 	}
 
 	public void showArmasExercito(){
+
+		System.out.println("---------------------------------------ARMAS DOS PERSONAGENS DO EXERCITO "+nomeExercito+"---------------------------------------");
+
 		personagensList.stream()
 		.map(p -> {
 			return p.getArma().visit(new ArmaVisitor() {
@@ -122,18 +125,18 @@ public class Exercito implements AmbienteObserver {
 	}
 
 	public void ganharMoral(){
-		this.state = this.state.getProximoEstado();
+		this.moralState = this.moralState.getProximoEstado();
 		updateMoralPersonagens();
 	}
 
 	public void perderMoral(){
-		this.state = this.state.getEstadoAnterior();
+		this.moralState = this.moralState.getEstadoAnterior();
 		updateMoralPersonagens();
 	}
 
 	private void updateMoralPersonagens() {
 		for (Personagem personagem : personagensList) {
-			personagem.setMoral(this.state);
+			personagem.setMoral(this.moralState);
 		}
 	}
 

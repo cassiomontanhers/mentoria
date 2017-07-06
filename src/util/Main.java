@@ -8,7 +8,8 @@ import factory.ExercitoFactory;
 import factory.FrancesesFactory;
 import observer.Ambiente;
 import observer.Chuva;
-import observer.ExercitoObserver;
+import observer.Tempestade;
+import observer.Ensolarado;
 
 public class Main {
 
@@ -21,33 +22,45 @@ public class Main {
 		Exercito exercitoBritanico = exercitoFactory.montarExercito(new BritanicosFactory());
 		Exercito exercitoFrances = exercitoFactory.montarExercito(new FrancesesFactory());
 
-		exercitoBarbaro.info();
-		exercitoBritanico.info();
-		exercitoFrances.info();
+		imprimirInformacoesExercitos(exercitoBarbaro, exercitoBritanico);
 
-		System.out.println("////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+
+		//ARMA
+		exercitoBarbaro.showArmasExercito();
+		exercitoBritanico.showArmasExercito();
+
 
 		//AMBIENTE
 		Ambiente ambiente = new Ambiente();
-		ambiente.attach(new ExercitoObserver(exercitoBarbaro));
-		ambiente.attach(new ExercitoObserver(exercitoBritanico));
-		ambiente.attach(new ExercitoObserver(exercitoFrances));
+		ambiente.attach(exercitoBarbaro);
+		ambiente.attach(exercitoBritanico);
+		ambiente.attach(exercitoFrances);
+
+		ambiente.setClima(new Ensolarado());
+
+		imprimirInformacoesExercitos(exercitoBarbaro, exercitoBritanico);
+
 
 		ambiente.setClima(new Chuva());
 
-		exercitoBarbaro.info();
-		exercitoBritanico.info();
+		imprimirInformacoesExercitos(exercitoBarbaro, exercitoBritanico);
+
+
+		ambiente.setClima(new Tempestade());
+
+		imprimirInformacoesExercitos(exercitoBarbaro, exercitoBritanico);
+
 
 		//BATALHA
+		new BatalhaController().batalhar(exercitoBarbaro, exercitoBritanico);
 
-		BatalhaController batalhaController = new BatalhaController();
-		batalhaController.batalhar(exercitoBarbaro, exercitoBritanico);
+		imprimirInformacoesExercitos(exercitoBarbaro, exercitoBritanico);
 
-		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++RESULTADO DA BATALHA++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+	}
 
-		exercitoBarbaro.info();
-		exercitoBritanico.info();
-
+	private static void imprimirInformacoesExercitos(Exercito exercito1, Exercito exercito2) {
+		exercito1.info();
+		exercito2.info();
 	}
 
 }
